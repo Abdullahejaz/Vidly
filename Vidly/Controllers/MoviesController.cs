@@ -15,7 +15,7 @@ namespace Vidly.Controllers
         MyDbContext _context = new MyDbContext();
 
         // GET: Movies
-        public ActionResult Random()
+       /* public ActionResult Random()
         {
             var movie = new Movie() { Name = "Shrek!" };
 
@@ -32,7 +32,9 @@ namespace Vidly.Controllers
             };
 
             return View(viewModel);
-        }
+        }*/
+
+
 
         public ActionResult Edit(int id)
         {
@@ -44,6 +46,13 @@ namespace Vidly.Controllers
             var movie = _context.Movies.ToList();
             return View(movie);
         }
+
+        public ActionResult CreateRecord()
+        {
+            return View();
+        }
+
+
 
         /*private IEnumerable<Movie> GetMovies()
         {      
