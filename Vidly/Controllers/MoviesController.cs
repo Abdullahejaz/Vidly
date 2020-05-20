@@ -11,6 +11,9 @@ namespace Vidly.Controllers
 {
     public class MoviesController : Controller
     {
+
+        MyDbContext _context = new MyDbContext();
+
         // GET: Movies
         public ActionResult Random()
         {
@@ -38,17 +41,18 @@ namespace Vidly.Controllers
 
         public ActionResult Index()
         {
-            var movie = GetMovies();
+            var movie = _context.Movies.ToList();
             return View(movie);
         }
-        private IEnumerable<Movie> GetMovies()
+
+        /*private IEnumerable<Movie> GetMovies()
         {      
             return new List<Movie>
             {
-                new Movie {Id = 1, Name = "Star Trek"},
+                new Movie {Id = 1, Name = "Star Trek",Genre = Genre.Comedy},
                 new Movie {Id = 2, Name = "Sholay"}
             };
-        }
+        }*/
         
     }
 }

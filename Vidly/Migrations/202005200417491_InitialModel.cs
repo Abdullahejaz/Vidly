@@ -3,10 +3,23 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class AddMembershiptType : DbMigration
+    public partial class InitialModel : DbMigration
     {
         public override void Up()
         {
+            CreateTable(
+                "dbo.Customers",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Name = c.String(nullable: false, maxLength: 255),
+                        IsSubscribedToNewsLetter = c.Boolean(nullable: false),
+                        MembershipTypeId = c.Byte(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.MembershipTypes", t => t.MembershipTypeId, cascadeDelete: true)
+                .Index(t => t.MembershipTypeId);
+            
             CreateTable(
                 "dbo.MembershipTypes",
                 c => new
@@ -18,17 +31,14 @@
                     })
                 .PrimaryKey(t => t.Id);
             
-            AddColumn("dbo.Customers", "MembershipTypeId", c => c.Byte(nullable: false));
-            CreateIndex("dbo.Customers", "MembershipTypeId");
-            AddForeignKey("dbo.Customers", "MembershipTypeId", "dbo.MembershipTypes", "Id", cascadeDelete: true);
         }
         
         public override void Down()
         {
             DropForeignKey("dbo.Customers", "MembershipTypeId", "dbo.MembershipTypes");
             DropIndex("dbo.Customers", new[] { "MembershipTypeId" });
-            DropColumn("dbo.Customers", "MembershipTypeId");
             DropTable("dbo.MembershipTypes");
+            DropTable("dbo.Customers");
         }
     }
 }
