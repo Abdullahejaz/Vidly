@@ -15,24 +15,24 @@ namespace Vidly.Controllers
         MyDbContext _context = new MyDbContext();
 
         // GET: Movies
-       /* public ActionResult Random()
-        {
-            var movie = new Movie() { Name = "Shrek!" };
+        /* public ActionResult Random()
+         {
+             var movie = new Movie() { Name = "Shrek!" };
 
-            var customers = new List<Customer>
-            {
-                new Customer {Name = "Customer 1"},
-                new Customer {Name = "Customer 2"}
-            };
+             var customers = new List<Customer>
+             {
+                 new Customer {Name = "Customer 1"},
+                 new Customer {Name = "Customer 2"}
+             };
 
-            var viewModel = new RandomMovieViewModel
-            {
-                Movie = movie,
-                Customers = customers
-            };
+             var viewModel = new RandomMovieViewModel
+             {
+                 Movie = movie,
+                 Customers = customers
+             };
 
-            return View(viewModel);
-        }*/
+             return View(viewModel);
+         }*/
 
 
 
@@ -47,21 +47,33 @@ namespace Vidly.Controllers
             return View(movie);
         }
 
+
         public ActionResult CreateRecord()
         {
+            //string name = movie.Name;
+            //DateTime releasedDate = movie.ReleasedDate;
+            //DateTime dateAdded = movie.DateAdded;
+            //int quantity = movie.Quantity;
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreateRecord(Movie movie)
+        {
+            string name = movie.Name;
+            DateTime releasedDate = movie.ReleasedDate;
+            DateTime dateAdded = movie.DateAdded;
+            int quantity = movie.Quantity;
+
+            _context.Movies.Add(movie);
+
+            _context.SaveChanges();
+
+
             return View();
         }
 
 
-
-        /*private IEnumerable<Movie> GetMovies()
-        {      
-            return new List<Movie>
-            {
-                new Movie {Id = 1, Name = "Star Trek",Genre = Genre.Comedy},
-                new Movie {Id = 2, Name = "Sholay"}
-            };
-        }*/
-        
     }
 }

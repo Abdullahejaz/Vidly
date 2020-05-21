@@ -4,10 +4,14 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-    <h2>Movies</h2>
+<h2>Movies</h2>
+
+<button type="button" onclick="location.href='@Url.Action("CreateRecord", "Movies")'"></button>
+
 @if (!Model.Any())
 {
     <p>We don't have any movies in stock.</p>
+
 }
 else
 {
@@ -23,6 +27,7 @@ else
                     <td>@movie.Name</td>
                 </tr>
             }
+
         </tbody>
     </table>
 }
