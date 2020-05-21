@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -35,10 +38,31 @@ namespace Vidly.Controllers
          }*/
 
 
-
         public ActionResult Edit(int id)
         {
-            return Content("id=" + id);
+           
+            var movie = _context.Movies.Where(m => m.Id == id).SingleOrDefault();
+
+            if (movie == null) 
+            {
+                return HttpNotFound();
+            }
+
+            return View(movie);  
+            
+        }
+        [HttpPost]
+        public ActionResult Edit(Movie movie)
+        {
+
+            if (ModelState.IsValid)
+            {
+                _context.Entry(movie).State = EntityState.Modified;
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(movie);
         }
 
         public ActionResult Index()
@@ -72,6 +96,14 @@ namespace Vidly.Controllers
 
 
             return View();
+        }
+
+        [Route("Movies/Details/{id}")]
+        public ActionResult Details(int id)
+        {
+            var movies = _context.Movies.SingleOrDefault(a => a.Id == id);
+
+            return View(movies);
         }
 
 
