@@ -83,7 +83,7 @@ namespace Vidly.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateRecord(Movie movie)
+        public ActionResult CreateRecord([Bind(Include = "Name,ReleasedDate,DateAdded,Quantity")] Movie movie)
         {
             string name = movie.Name;
             DateTime releasedDate = movie.ReleasedDate;
@@ -95,7 +95,7 @@ namespace Vidly.Controllers
             _context.SaveChanges();
 
 
-            return View();
+            return RedirectToAction("Index");
         }
 
         [Route("Movies/Details/{id}")]
