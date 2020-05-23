@@ -1,4 +1,4 @@
-﻿@model Vidly.Models.WeatherInfo
+﻿@model Vidly.Models.CityWeather
 
 @{
     ViewBag.Title = "Index";
@@ -7,45 +7,37 @@
 
 <h2>Index</h2>
 
-<div>
-    <h4>WeatherInfo</h4>
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <h4>CityWeather</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Weather)
-        </dt>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.CityName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.CityName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.CityName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.CountryAbbreviation, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.CountryAbbreviation, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.CountryAbbreviation, "", new { @class = "text-danger" })
+        </div>
+    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Weather)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Temperature)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Temperature)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TemperatureMin)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TemperatureMin)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TemperatureMax)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TemperatureMax)
-        </dd>
-
-    </dl>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Show Weather" class="btn btn-default" />
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+}
+
+<div>
     @Html.ActionLink("Back to List", "Index")
-</p>
+</div>

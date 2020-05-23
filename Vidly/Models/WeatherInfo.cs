@@ -11,5 +11,7 @@ namespace Vidly.Models
         public double Temperature { get; set; }
         public double TemperatureMin { get; set; }
         public double TemperatureMax { get; set; }
+
+        public string CityName { get; set; }
     }
 }

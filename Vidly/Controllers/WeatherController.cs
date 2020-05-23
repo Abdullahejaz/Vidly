@@ -16,25 +16,33 @@ namespace Vidly.Controllers
     public class WeatherController : Controller
     {
         
-        // GET: Weather
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
+
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Index(CityWeather cityWeather)
+        {
+            
             var appid = "d71a2d1f949793c83d9b8a3697d9d025";
 
-            var baseUrl = $"http://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID={appid}";
+            var baseUrl = $"http://api.openweathermap.org/data/2.5/weather?q={cityWeather.CityName},{cityWeather.CountryAbbreviation}&APPID={appid}";
 
-          
                 HttpClient httpClient = new HttpClient();
             /* HttpResponseMessage httpResponseMessage = await httpClient.GetAsync(baseUrl);
              httpResponseMessage.EnsureSuccessStatusCode();
              var data = await httpResponseMessage.Content.ReadAsStringAsync();*/
 
             string data = await httpClient.GetStringAsync(baseUrl);
+           
 
             var deserialize = JsonConvert.DeserializeObject<Example>(data);
 
             WeatherInfo weatherInfo = new WeatherInfo
             {
+                CityName = deserialize.name,
                 Weather = deserialize.weather[0].description,
                 Temperature = deserialize.main.temp,
                 TemperatureMin = deserialize.main.temp_min,
@@ -42,7 +50,7 @@ namespace Vidly.Controllers
             };
 
 
-            return View(weatherInfo);
+            return View("ShowWeatherDetail", weatherInfo);
         }
     }
 }

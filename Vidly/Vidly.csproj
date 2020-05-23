@@ -271,6 +271,7 @@
       <DependentUpon>202005202035394_AddDatesAndQuantityToMovies.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\CityWeather.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\MembershipType.cs" />
     <Compile Include="Models\Movie.cs" />
@@ -325,6 +326,7 @@
     <Content Include="Views\Movies\CreateRecord.cshtml" />
     <Content Include="Views\Movies\Details.cshtml" />
     <Content Include="Views\Movies\Edit.cshtml" />
+    <Content Include="Views\Weather\ShowWeatherDetail.cshtml" />
     <Content Include="Views\Weather\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>

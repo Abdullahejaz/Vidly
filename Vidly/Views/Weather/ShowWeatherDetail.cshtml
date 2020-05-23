@@ -1,0 +1,55 @@
+﻿@model Vidly.Models.WeatherInfo
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<div>
+    <h4>WeatherInfo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CityName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CityName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Weather)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Weather)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Temperature)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Temperature)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TemperatureMin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TemperatureMin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TemperatureMax)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TemperatureMax)
+        </dd>
+
+    </dl>
+</div>
