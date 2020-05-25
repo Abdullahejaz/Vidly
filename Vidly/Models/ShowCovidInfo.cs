@@ -11,6 +11,5 @@ namespace Vidly.Models
         public int ConfirmedCases { get; set; }
         public int Recovered { get; set; }
         public int Dead { get; set; }
-        public int ActiveCases { get; set; }
     }
 }

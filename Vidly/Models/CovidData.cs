@@ -1,26 +1,41 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
 namespace Vidly.Models
 {
-    public class Provinces
+    public class Global
     {
-        public string province { get; set; }
-        public int confirmed { get; set; }
-        public int recovered { get; set; }
-        public int deaths { get; set; }
-        public int active { get; set; }
-
+        public int NewConfirmed { get; set; }
+        public int TotalConfirmed { get; set; }
+        public int NewDeaths { get; set; }
+        public int TotalDeaths { get; set; }
+        public int NewRecovered { get; set; }
+        public int TotalRecovered { get; set; }
     }
-    public class Application
+
+    public class CountryData
     {
-        public string country { get; set; }
-        public IList<Provinces> provinces { get; set; }
-        public double latitude { get; set; }
-        public double longitude { get; set; }
-        public string date { get; set; }
-
+        public string Country { get; set; }
+        public string CountryCode { get; set; }
+        public string Slug { get; set; }
+        public int NewConfirmed { get; set; }
+        public int TotalConfirmed { get; set; }
+        public int NewDeaths { get; set; }
+        public int TotalDeaths { get; set; }
+        public int NewRecovered { get; set; }
+        public int TotalRecovered { get; set; }
+        public DateTime Date { get; set; }
     }
+
+    public class CovidRoot
+    {
+        public Global Global { get; set; }
+        public IList<CountryData> Countries { get; set; }
+        public DateTime Date { get; set; }
+    }
+
+
 }

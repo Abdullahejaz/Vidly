@@ -17,38 +17,53 @@ namespace Vidly.Controllers
         public async Task<ActionResult> Index()
         {
 
-            var token = "7efcfd2232msh2d997e88b427037p193f9ejsn7d1c850e4160";
-            var baseUrl = $"https://covid-19-data.p.rapidapi.com/report/country/name?date-format=YYYY-MM-DD&format=json&date=2020-04-01&name=Italy";
-            var tokenType = "x-rapidapi-key"; //Other APIs use Bearer or other auth types.
-            
+
+            var baseUrl = $"https://api.covid19api.com/summary";
+
 
 
             HttpClient httpClient = new HttpClient();
 
-            HttpRequestMessage request = new HttpRequestMessage();
-            request.RequestUri = new Uri(baseUrl);
-            
-            
-            request.Headers.Add(tokenType, token);
-            HttpResponseMessage response = await httpClient.SendAsync(request);
-            var responseString = await response.Content.ReadAsStringAsync();
-            var statusCode = response.StatusCode;
+            /* HttpRequestMessage request = new HttpRequestMessage();
+             request.RequestUri = new Uri(baseUrl);*/
 
-            var deserealize = JsonConvert.DeserializeObject<Application>(responseString);
+            /* 
+             request.Headers.Add(tokenType, token);
+             HttpResponseMessage response = await httpClient.SendAsync(request);
+             var responseString = await response.Content.ReadAsStringAsync();
+             var statusCode = response.StatusCode;*/
 
-            /*string data = await httpClient.GetStringAsync(baseUrl);
-           */
-            ShowCovidInfo showCovidInfo = new ShowCovidInfo
+
+            string data = await httpClient.GetStringAsync(baseUrl);
+
+            var deserialize = JsonConvert.DeserializeObject<CovidRoot>(data);
+
+
+            List<ShowCovidInfo> showCovidInfo = new List<ShowCovidInfo>();
+
+            foreach (var i in deserialize.Countries)
             {
-                Name = deserealize.provinces[0].province,
-                ConfirmedCases = deserealize.provinces[0].confirmed,
-                Recovered = deserealize.provinces[0].recovered,
-                Dead = deserealize.provinces[0].deaths,
-                ActiveCases = deserealize.provinces[0].active
+                
+                {
 
-            };
+                    showCovidInfo.Add(
+                        new ShowCovidInfo
+                        {
+                            Name = i.Country,
+                            ConfirmedCases = i.TotalConfirmed,
+                            Recovered = i.TotalRecovered,
+                            Dead = i.TotalDeaths
+                        }
+                    );
 
-            return View(showCovidInfo);
+                };
+
+               
+            }
+
+            return View(showCovidInfo.ToList());
+
+
         }
     }
 }
