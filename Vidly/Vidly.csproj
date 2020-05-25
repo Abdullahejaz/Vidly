@@ -52,6 +52,12 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="ExcelDataReader, Version=3.6.0.0, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelDataReader.3.6.0\lib\net45\ExcelDataReader.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelDataReader.DataSet, Version=3.6.0.0, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelDataReader.DataSet.3.6.0\lib\net35\ExcelDataReader.DataSet.dll</HintPath>
+    </Reference>
     <Reference Include="LumenWorks.Framework.IO, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5ad3ea2f85776344, processorArchitecture=MSIL">
       <HintPath>..\packages\LumenWorksCsvReader.4.0.0\lib\net461\LumenWorks.Framework.IO.dll</HintPath>
     </Reference>
@@ -122,6 +128,7 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.IO.Compression" />
     <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
     </Reference>
@@ -236,6 +243,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CovidController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
+    <Compile Include="Controllers\ExcelFileUploadController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MoviesController.cs" />
     <Compile Include="Controllers\WeatherController.cs" />
@@ -278,6 +286,7 @@
     <Compile Include="Models\CityWeather.cs" />
     <Compile Include="Models\CovidData.cs" />
     <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\ExcelSheetData.cs" />
     <Compile Include="Models\MembershipType.cs" />
     <Compile Include="Models\Movie.cs" />
     <Compile Include="Models\MyDbContext.cs" />
@@ -336,6 +345,7 @@
     <Content Include="Views\Weather\ShowWeatherDetail.cshtml" />
     <Content Include="Views\Weather\Index.cshtml" />
     <Content Include="Views\Covid\Index.cshtml" />
+    <Content Include="Views\ExcelFileUpload\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
